@@ -1,29 +1,10 @@
-# pk
+# YY 영화 앱 미리보기 ~
 
-This template should help get you started developing with Vue 3 in Vite.
+|login|login modal|
+|--|--|
+|<img src="https://github.com/movie-team/YYFE/assets/113872386/a2c42592-a253-404a-b42e-8336ac3aff01">|<img src="https://github.com/movie-team/YYFE/assets/113872386/316dc9a4-8be8-4ae7-9478-900fd2e02e32">|
 
-## Recommended IDE Setup
+|home|signup|
+|--|--|
+|<img src="https://github.com/movie-team/YYFE/assets/113872386/8f6de072-799f-4fc2-9767-c8c54fb70f9e">|<img src="https://github.com/movie-team/YYFE/assets/113872386/59217d9f-253c-4b93-9d55-934f707aa95c">|
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
