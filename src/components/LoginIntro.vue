@@ -7,10 +7,17 @@
                     영화 검색부터 추천까지!<br><br>
                     관람객들의 리얼한 리뷰도 만나보세요.
                 </h3>
-                <button class="movingBtn loginBtn">무빙 로그인</button>
+                <button
+                    class="movingBtn loginBtn"
+                    @click="store.loginModal = true"
+                >
+                    무빙 로그인
+                </button>
                 <div class="wantSignup">
                     <p>계정이 없으신가요?</p>
-                    <button class="movingBtn">무빙 가입하기</button>
+                    <button class="movingBtn"
+                        @click="router.push({name:'signup'})"
+                    >무빙 가입하기</button>
                 </div>
             </div>
         </div>
@@ -18,6 +25,10 @@
 </template>
 
 <script setup>
+import { useMovieStore } from '../stores/movie';
+import { useRouter } from 'vue-router';
+const store = useMovieStore()
+const router = useRouter()
 
 </script>
 
