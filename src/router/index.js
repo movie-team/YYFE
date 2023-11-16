@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue'
 import MovieView from '@/views/MovieView.vue'
 import SeriesView from '@/views/SeriesView.vue'
 import RecommendView from '@/views/RecommendView.vue'
+import LoginOverView from '@/views/LoginOverView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,11 @@ const router = createRouter({
       path: '/recommend',
       name: 'recommend',
       component: RecommendView
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginOverView
     },
   ]
 })

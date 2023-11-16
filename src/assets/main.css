@@ -4,3 +4,36 @@ body{
     margin: 0;
     color: white;
 }
+
+button {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+.movingBtn{
+    cursor: pointer;
+    border: none;
+    background-color: #FF153C;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-weight: bold;
+    color:white;
+}
+
+.movingBtn:hover{
+    filter:brightness(90%)
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flexRow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
