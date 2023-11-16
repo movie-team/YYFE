@@ -1,13 +1,11 @@
 <template>
     <div id="sliderWrapper">
-        <!-- <SliderPostItem /> -->
-        <!-- <img src="https://image.tving.com/ntgs/operation/banner/2023/11/10/1699582145_1.jpg/dims/resize/F_webp,1920" alt="">
-        <img src="https://image.tving.com/ntgs/contents/CTC/caip/CAIP1800/ko/20230831/P001743591.png?v=1695719430/dims/resize/F_webp,1024" alt=""> -->
         <VueperSlides
           3d fixed-height="400px"
           bullets-outside
           autoplay
           :bullets="false"
+          infinite
         >
           <vueper-slide
               v-for="(slide, i) in slides"

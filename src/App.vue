@@ -8,7 +8,7 @@ import HeaderMenu from './components/HeaderMenu.vue';
     <div class="header">
       <nav>
         <RouterLink :to="{ name: 'home' }">
-          <img src="@/assets/tving.svg" alt="">
+          <img src="@/assets/moving.svg" alt="">
         </RouterLink>
         <RouterLink :to="{ name: 'series' }">시리즈</RouterLink>
         <RouterLink :to="{ name: 'movie' }">영화</RouterLink>
@@ -52,7 +52,9 @@ text-decoration: none;
 font-weight: 600;
 }
 
+
 nav a img {
-  height:2rem;
+  height:1rem;
+  padding-top: 6px;
 }
 </style>
