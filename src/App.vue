@@ -1,6 +1,12 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HeaderMenu from './components/HeaderMenu.vue';
+import HeaderLogin from '@/components/HeaderLogin.vue';
+import HeaderLogout from '@/components/HeaderLogout.vue'
+import Modal from './components/Modal.vue';
+import LoginForm from './components/LoginForm.vue';
+import { useMovieStore } from '@/stores/movie';
+
+const store = useMovieStore()
 </script>
 
 <template>
@@ -14,8 +20,14 @@ import HeaderMenu from './components/HeaderMenu.vue';
         <RouterLink :to="{ name: 'movie' }">영화</RouterLink>
         <RouterLink :to="{ name: 'recommend' }">추천</RouterLink>
       </nav>
-      <HeaderMenu />
+      <HeaderLogin v-if="store.isLogin"/>
+      <HeaderLogout v-else/>
+      <!-- {{ store.isLogin ? <HeaderLogin /> : <HeaderLogin/> }} -->
+
     </div>
+      <Modal v-if="store.loginModal">
+        <LoginForm />
+      </Modal>
   </header>
 
   <RouterView />
@@ -23,7 +35,6 @@ import HeaderMenu from './components/HeaderMenu.vue';
 
 <style scoped>
 header {
-  line-height: 1.5;
   max-height: 100vh;
   width:100%;
   background-color: rgba(0, 0, 0, 0.8);
@@ -31,6 +42,7 @@ header {
   top:0;
   left:0;
   z-index: 9999;
+  /* position: relative; */
 }
 
 .header {

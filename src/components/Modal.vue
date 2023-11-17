@@ -20,7 +20,7 @@ const store = useMovieStore()
 <style scoped>
 
 .modalBg{
-    position: absolute;
+    position: fixed;
     top: 0;
     left:0;
     width: 97vw;
@@ -31,11 +31,11 @@ const store = useMovieStore()
     box-shadow: 1px 1px 10px 1px rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     padding: 50px;
-    position: absolute;
-    top:40%;
+    position: fixed;
+    top:50%;
     left:50%;
     transform: translate(-50%, -50%);
-    z-index: 999;
+    z-index: 9999999;
 }
 
 .closeBtn {

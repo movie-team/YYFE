@@ -2,13 +2,13 @@
     <div class="flexColumn">
         <form id="loginForm" @submit.prevent="login">
             <div>
-                <label for="id">
-                    <input type="text" id="id" placeholder="아이디" v-model="userId">
+                <label for="username">
+                    <input type="text" id="username" placeholder="아이디" v-model="username">
                 </label>
             </div>
             <div>
-                <label for="pwd">
-                    <input type="password" id="pwd" placeholder="비빌번호" v-model="pwd">
+                <label for="password">
+                    <input type="password" id="password" placeholder="비빌번호" v-model="password">
                 </label>
             </div>
             <button class="movingBtn">로그인하기</button>
@@ -31,15 +31,15 @@ import { useRouter } from 'vue-router';
 const store = useMovieStore()
 const router = useRouter()
 
-const userId = ref(null)
-const pwd = ref(null)
+const username = ref(null)
+const password = ref(null)
 
 const login = () => {
     const payload = {
         // userId: userId.value,
         // pwd: pwd.value,
-        username: userId.value,
-        password: pwd.value,
+        username: username.value,
+        password: password.value,
     }
     store.login(payload)
 }

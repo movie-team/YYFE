@@ -3,18 +3,28 @@
         <h1>회원가입</h1>
         <form id="signupForm" @submit.prevent="signup">
             <div>
-                <label for="id">
-                    <input type="text" id="id" placeholder="아이디" v-model="userId">
+                <label for="username">
+                    <input type="text" id="username" placeholder="아이디" v-model="username" required>
                 </label>
             </div>
             <div>
-                <label for="pwd">
-                    <input type="password" id="pwd" placeholder="비빌번호" v-model="pwd">
+                <label for="password1">
+                    <input type="password" id="password1" placeholder="비빌번호" v-model="password1" required>
                 </label>
             </div>
             <div>
-                <label for="pwdConfirm">
-                    <input type="password" id="pwdConfirm" placeholder="비빌번호 확인" v-model="pwdConfirm">
+                <label for="password2">
+                    <input type="password" id="password2" placeholder="비빌번호 확인" v-model="password2" required>
+                </label>
+            </div>
+            <div>
+                <label for="nickname">
+                    <input type="text" id="nickname" placeholder="닉네임" v-model="nickname" required>
+                </label>
+            </div>
+            <div>
+                <label for="email">
+                    <input type="text" id="email" placeholder="email" v-model="email">
                 </label>
             </div>
             <button class="movingBtn">회원가입 하기</button>
@@ -25,21 +35,29 @@
 <script setup>
 import { ref } from 'vue';
 import { useMovieStore } from '../stores/movie';
+import { useRouter } from 'vue-router';
 
 const store = useMovieStore()
+const router = useRouter();
 
-const userId = ref(null)
-const pwd = ref(null)
-const pwdConfirm = ref(null)
+const username = ref(null)
+const password1 = ref(null)
+const password2 = ref(null)
+const nickname = ref(null)
+const email = ref(null)
 
 const signup = () => {
     const payload = {
-        username : userId.value,
-        password1 : pwd.value,
-        password2 : pwdConfirm.value
+        username : username.value,
+        password1 : password1.value,
+        password2 : password2.value,
+        nickname : nickname.value,
+        email : email.value,
     }
     console.log(payload)
     store.signup(payload)
+    window.alert('회원가입 성공!')
+    router.push({name: 'home'})
 }
 
 </script>
