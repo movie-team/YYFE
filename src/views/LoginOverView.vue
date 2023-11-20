@@ -11,9 +11,9 @@
 
 <script setup>
 import LoginIntro from '@/components/LoginIntro.vue'
-import LoginForm from '../components/LoginForm.vue';
-import Modal from '../components/Modal.vue';
-import { useMovieStore } from '../stores/movie';
+import LoginForm from '@/components/LoginForm.vue';
+import Modal from '@/components/Modal.vue';
+import { useMovieStore } from '@/stores/movie';
 
 const store = useMovieStore()
 

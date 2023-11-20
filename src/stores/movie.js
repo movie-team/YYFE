@@ -8,11 +8,12 @@ export const useMovieStore = defineStore('movie', () => {
   const router = useRouter()
   const loginModal = ref(false)
   const accessToken = ref(null)
+  const nowPlayingMovies = ref(null)
   const nickname = ref(null)
   // accesstoken 는 분단위
   // refreshtoken 은 일단위
   
-  const API_URL = 'https://6016-175-209-62-47.ngrok-free.app'
+  // const API_URL = 'https://6016-175-209-62-47.ngrok-free.app'
 
   const isLogin = computed(() => {
     if (accessToken.value) {
@@ -20,19 +21,20 @@ export const useMovieStore = defineStore('movie', () => {
     } else return false
   })
 
-  const getMovies = (url) => {
-    axios({
+  const getMovies = async (url) => {
+    return await axios({
       method: 'get',
       // url: `${API_URL}/movies/${url}/`,
       url: `/api/movies/${url}/`,
       headers: {
-        Authorization: `Token ${accessToken.value}`,
+        // Authorization: `Token ${accessToken.value}`,
         "Content-Type": 'application/json',
         "ngrok-skip-browser-warning": "skip",
       }
     })
       .then(res => {
-        console.log(res)
+        console.log(res.data)
+        // nowPlayingMovies.value = res.data
         return res.data
       })
       .catch(err => {
@@ -68,7 +70,7 @@ export const useMovieStore = defineStore('movie', () => {
         console.log(res)
         accessToken.value = res.data.key
         loginModal.value = false
-        console.log(accessToken.value)
+        // console.log(accessToken.value)
         window.alert('로그인 성공!')        
         router.push({name: 'home'})
       })
@@ -95,5 +97,5 @@ export const useMovieStore = defineStore('movie', () => {
       .catch(err=> console.log(err))
    }
 
-  return { signup, login, loginModal, isLogin, logout, accessToken, getMovies }
+  return { signup, login, loginModal, isLogin, logout, accessToken, getMovies, nowPlayingMovies }
 }, { persist: true })

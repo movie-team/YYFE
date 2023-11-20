@@ -34,7 +34,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useMovieStore } from '../stores/movie';
+import { useMovieStore } from '@/stores/movie';
 import { useRouter } from 'vue-router';
 
 const store = useMovieStore()
