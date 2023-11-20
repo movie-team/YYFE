@@ -2,8 +2,8 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HeaderLogin from '@/components/HeaderLogin.vue';
 import HeaderLogout from '@/components/HeaderLogout.vue'
-import Modal from './components/Modal.vue';
-import LoginForm from './components/LoginForm.vue';
+import Modal from '@/components/Modal.vue';
+import LoginForm from '@/components/LoginForm.vue';
 import { useMovieStore } from '@/stores/movie';
 
 const store = useMovieStore()
@@ -59,7 +59,7 @@ nav {
 nav a:not(:first-child) {
 padding: 5px 10px;
 color: #d9d9d9;
-font-size: 12px;
+font-size: 14px;
 text-decoration: none;
 font-weight: 600;
 }
@@ -68,5 +68,6 @@ font-weight: 600;
 nav a img {
   height:1rem;
   padding-top: 6px;
+  margin-right: 20px;
 }
 </style>
