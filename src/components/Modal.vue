@@ -6,7 +6,11 @@
                 @click="store.loginModal = false"
             >❌</div>
             <slot></slot>
+            <div class="deadpoolImg">
+            <img src="@/assets/deadpool1.png" alt="">
         </div>
+        </div>
+
     </div>
 </template>
 
@@ -35,7 +39,7 @@ const store = useMovieStore()
     top:50%;
     left:50%;
     transform: translate(-50%, -50%);
-    z-index: 9999999;
+    z-index: 9999;
 }
 
 .closeBtn {
@@ -43,6 +47,19 @@ const store = useMovieStore()
     top: 20px;
     right: 20px;
     cursor: pointer;
+}
+
+.deadpoolImg{
+    width: 100%;
+    position: absolute;
+    bottom: 98%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;
+}
+
+img{
+    width:100%;
 }
 
 </style>

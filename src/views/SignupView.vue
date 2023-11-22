@@ -1,6 +1,9 @@
 <template>
     <div class="flexColumn">
         <h1>회원가입</h1>
+        <div class="deadpoolImg">
+            <img src="@/assets/deadpool3.png" alt="">
+        </div>
         <form id="signupForm" @submit.prevent="signup">
             <div>
                 <label for="username">
@@ -84,6 +87,16 @@ const signup = () => {
     color: white;
 }
 
+.deadpoolImg{
+    width: 400px;
+    height: 100px;
+    overflow: hidden;
+}
+.deadpoolImg img {
+    width: 100%;
+    /* object-fit: cover; */
+    object-position: center bottom;
+}
 .movingBtn {
     width:100%;
     font-size: 1.1rem;

@@ -1,7 +1,7 @@
 <template>
     <div class="slider">
         <SliderPost />
-        <SlideMenu />
+        <!-- <SlideMenu /> -->
         <NowPlayingRank />
         <PopularMovieRank />
     </div>
@@ -17,9 +17,10 @@ import PopularMovieRank from '@/components/PopularMovieRank.vue';
 
 
 const store = useMovieStore()
-// onMounted(()=> {
-//     console.log(`로그인 상태 : ${store.isLogin}, 토큰 : ${store.accessToken}`)
-// })
+onMounted(()=> {
+    console.log(`로그인 상태 : ${store.isLogin}, 토큰 : ${store.accessToken}`)
+    // store.getUserInfo()
+})
 
 // onUpdated(() => {
 //     console.log(`로그인 상태 : ${store.isLogin}, 토큰 : ${store.accessToken}`)

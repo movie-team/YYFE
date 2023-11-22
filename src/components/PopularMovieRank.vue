@@ -1,17 +1,17 @@
 <template>
-  
     <h3>인기 순위 TOP 20</h3>
     <div class="grid">
-        <div class="card flexColumn" v-for="movie in movies" >
-            <p class="rankNum">{{ movies.indexOf(movie) + 1 }}</p>
-            <p class="movieInfo flexColumn">
-                <img class="img" :src="moviePath(movie.poster)" :alt="movie.title">
-                <p class="movieTitle">{{ movie.title }}</p>
-                <p class="movieScore">⭐{{ movie.average_rate.toFixed(1) }}</p>
-            </p>
+            <div class="card flexColumn" v-for="movie in movies" v-show="movies.indexOf(movie) < 100">
+                <div class="movieInfo flexRow">
+                    <p class="rankNum">{{ movies.indexOf(movie) + 1 }}</p>
+                    <p class="movieTitle">{{ movie.title }}</p>
+                </div>
+                <div class="movieInfo flexColumn">
+                    <img class="img" :src="moviePath(movie.poster)" :alt="movie.title">
+                    <p class="movieScore">⭐{{ movie.average_rate.toFixed(1) }}</p>
+                </div>
+            </div>
         </div>
-
-    </div>
 </template>
 
 <script setup>
@@ -20,14 +20,19 @@ import { useMovieStore } from '../stores/movie';
 
 const store = useMovieStore()
 const movies = ref([])
-// 포스터 이미지 가져오기
 
+// 백엔드에서 받은 영화 배열
 onMounted(()=> {
-  console.log('OnMounted')
   store.getMovies('get_popular_movies')
-   .then(el => movies.value = el)
+    .then(el => el.sort((a, b)=> b.average_rate - a.average_rate))
+    .then(el => {
+        movies.value = el
+        store.popularMovies= el
+   })
   }
 )
+
+// 포스터 이미지 가져오기
 const moviePath = (path) => `https://image.tmdb.org/t/p/w500/${path}`
 
 </script>
@@ -45,32 +50,44 @@ const moviePath = (path) => `https://image.tmdb.org/t/p/w500/${path}`
     cursor: pointer;
 }
 
-.card p {
-    text-align: center;
+.card:hover {
+    transform:scale(1.2);
+  transition: transform .5s;
 }
 
 .movieInfo{
     width: 100%;
     margin: 0;
     justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .rankNum {
-    margin: 5px;
+    margin: 0;
+    font-size: 30px;
+    font-weight: 900;
+    font-style: oblique;
 }
 
-.movieInfo img {
+.movieInfo > img {
     width: 100%;
+    /* height: calc(100% - 60px); */
+    border-radius: 10px;
+    display: block;
+    /* max-height: 250px; */
 }
 
-.movieTitle {
+.movieInfo > p {
+    margin: 0;
+    text-align: center;
+}
+.movieTitle{
+    font-size: 1rem;
     width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.movieScore {
-    margin: 10px 0;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
 }
 </style>

@@ -16,8 +16,8 @@ const store = useMovieStore()
         <RouterLink :to="{ name: 'home' }">
           <img src="@/assets/moving.svg" alt="">
         </RouterLink>
-        <RouterLink :to="{ name: 'series' }">시리즈</RouterLink>
-        <RouterLink :to="{ name: 'movie' }">영화</RouterLink>
+        <RouterLink :to="{ name: 'nowplaying' }">최신영화</RouterLink>
+        <RouterLink :to="{ name: 'popular' }">인기영화</RouterLink>
         <RouterLink :to="{ name: 'recommend' }">추천</RouterLink>
       </nav>
       <HeaderLogin v-if="store.isLogin"/>

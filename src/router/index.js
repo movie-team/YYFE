@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import MovieView from '@/views/MovieView.vue'
-import SeriesView from '@/views/SeriesView.vue'
+import PopularView from '@/views/PopularView.vue'
+import NowPlayingView from '@/views/NowPlayingView.vue'
 import RecommendView from '@/views/RecommendView.vue'
 import LoginOverView from '@/views/LoginOverView.vue'
 import SignupView from '@/views/SignupView.vue'
@@ -15,14 +15,14 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/movie',
-      name: 'movie',
-      component: MovieView
+      path: '/popular',
+      name: 'popular',
+      component: PopularView
     },
     {
-      path: '/series',
-      name: 'series',
-      component: SeriesView
+      path: '/nowplaying',
+      name: 'nowplaying',
+      component: NowPlayingView
     },
     {
       path: '/recommend',

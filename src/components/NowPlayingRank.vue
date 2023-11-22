@@ -15,8 +15,8 @@
                         <p class="rankNum">{{ movies.indexOf(movie) + 1 }}</p>
                         <p class="movieInfo flexColumn">
                             <img class="img" :src="moviePath(movie.poster_path)" :alt="movie.title">
-                            <p class="slideTitle">{{ movie.title }}</p>
-                            <p class="slideScore">⭐{{ movie.vote_average.toFixed(1) }}</p>
+                            <p class="movieTitle">{{ movie.title }}</p>
+                            <p class="movieScore">⭐{{ movie.vote_average.toFixed(1) }}</p>
                             <p></p>
                         </p>
                     </div>
@@ -37,10 +37,11 @@ const movies = ref([])
 
 // 백엔드에서 받은 영화 배열
 onMounted(()=> {
-  console.log('OnMounted')
   store.getMovies('get_now_playing')
-   .then(el => el.sort((a, b)=> b.vote_average- a.vote_average)).then(el => {
+   .then(el => el.sort((a, b)=> b.vote_average - a.vote_average))
+   .then(el => {
     movies.value = el
+    store.nowplayingMovies = el
    })
   }
 )
@@ -88,10 +89,7 @@ const moviePath = (path) => `https://image.tmdb.org/t/p/w500/${path}`
       margin: 0;
       text-align: center;
     }
-    .slideTitle{
-        font-size: 60px;
-        margin:0;
-        color: white;
+    .movieTitle{
         font-size: 1rem;
         width: 100%;
         overflow:hidden;
