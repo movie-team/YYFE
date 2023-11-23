@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>현재 상영작 TOP 20</h3>
+        <h1>현재 상영작 TOP 20</h1>
         <VueperSlides
             :visible-slides="4"
             slide-multiple
