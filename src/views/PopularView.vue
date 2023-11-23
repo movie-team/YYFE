@@ -1,8 +1,12 @@
 <template>
     <div class="popularWrapper">
-        <h3>인기 순위 TOP 100</h3>
+        <h1>인기 순위 TOP 100</h1>
         <div class="grid">
-            <div class="card flexColumn" v-for="movie in movies" v-show="movies.indexOf(movie) < 100">
+            <div class="card flexColumn"
+                v-for="movie in movies"
+                v-show="movies.indexOf(movie) < 100"
+                @click="router.push({ name: 'detail', params: { id: movie.id } })"
+            >
                 <div class="movieInfo flexRow">
                     <p class="rankNum">{{ movies.indexOf(movie) + 1 }}</p>
                     <p class="movieTitle">{{ movie.title }}</p>
@@ -19,7 +23,9 @@
 <script setup>
 import { useMovieStore } from '@/stores/movie';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const store = useMovieStore()
 const movies = ref(store.popularMovies)
 
@@ -30,7 +36,9 @@ const moviePath = (path) => `https://image.tmdb.org/t/p/w500/${path}`
 </script>
 
 <style scoped>
-
+h1 {
+  margin: 40px 0;
+}
 .popularWrapper {
     padding: 40px;
 }

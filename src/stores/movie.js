@@ -12,7 +12,6 @@ export const useMovieStore = defineStore(
     const nowplayingMovies = ref([]);
     const popularMovies = ref([]);
     const userInfo = ref(null);
-
     const movieGenres = ref({
       12: "어드벤처",
       14: "판타지",
@@ -38,6 +37,8 @@ export const useMovieStore = defineStore(
     // accesstoken 는 분단위
     // refreshtoken 은 일단위
 
+    const API = 'http://localhost:8000'
+
     const isLogin = computed(() => {
       if (accessToken.value) {
         return true;
@@ -47,10 +48,11 @@ export const useMovieStore = defineStore(
     const recommendMovies = async () => {
       return await axios({
         method: "get",
-        url: `/api/movies/4/recommend/`,
+        url: `${API}/movies/4/recommend/`,
+        // url: `/api/movies/4/recommend/`,
         headers: {
           "Content-Type": "application/json",
-          "ngrok-skip-browser-warning": "skip",
+          // "ngrok-skip-browser-warning": "skip",
         },
       })
         .then((res) => {
@@ -65,15 +67,14 @@ export const useMovieStore = defineStore(
     const getMovies = async (url) => {
       return await axios({
         method: "get",
+        // url: `${API}/movies/${url}/`,
         url: `/api/movies/${url}/`,
         headers: {
-          // Authorization: `Token ${accessToken.value}`,
           "Content-Type": "application/json",
           "ngrok-skip-browser-warning": "skip",
         },
       })
         .then((res) => {
-          console.log(res.data);
           return res.data;
         })
         .catch((err) => {
@@ -84,6 +85,7 @@ export const useMovieStore = defineStore(
     const getUserInfo = () => {
       axios({
         method: "get",
+        // url: `${API}/accounts/user/`,
         url: "/api/accounts/user/",
         headers: {
           Authorization: `Token ${accessToken.value}`,
@@ -99,28 +101,34 @@ export const useMovieStore = defineStore(
         .catch((err) => console.log(err));
     };
 
-    const signup = (payload) => {
-      axios({
-        method: "post",
-        // url: `${API_URL}/accounts/signup/`,
-        url: `/api/accounts/signup/`,
-        data: payload,
-      })
-        .then((res) => {
-          window.alert("회원가입 성공 !");
-          router.push({ name: "login" });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    const getCSRFToken = () => {
+      const name = "csrftoken=";
+      const decodedCookie = decodeURIComponent(document.cookie);
+      const cookieArray = decodedCookie.split(";");
+
+      for (let i = 0; i < cookieArray.length; i++) {
+        let cookie = cookieArray[i].trim();
+        if (cookie.indexOf(name) === 0) {
+          return cookie.substring(name.length, cookie.length);
+        }
+      }
+
+      return null;
     };
 
     const login = (payload) => {
+      const csrfToken = getCSRFToken();
+
       axios({
         method: "post",
-        // url: `${API_URL}/accounts/login/`,
+        // url: `${API}/accounts/login/`,
         url: `/api/accounts/login/`,
         data: payload,
+        headers: {
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "skip",
+          "X-CSRFToken": csrfToken,  // CSRF 토큰을 헤더에 추가
+        },
       })
         .then((res) => {
           accessToken.value = res.data.key;
@@ -136,19 +144,50 @@ export const useMovieStore = defineStore(
     };
 
     const logout = () => {
+
+      const csrfToken = getCSRFToken();
       axios({
         method: "post",
-        // url: `${API_URL}/accounts/logout/`,
+        // url: `${API}/accounts/logout/`,
         url: `/api/accounts/logout/`,
         headers: {
           Authorization: `Token ${accessToken.value}`,
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "skip",
+          "X-CSRFToken": csrfToken,  // CSRF 토큰을 헤더에 추가
         },
       })
         .then((res) => {
           accessToken.value = null;
+          userInfo.value = null;
           window.alert("로그아웃 되었습니다");
         })
         .catch((err) => console.log(err));
+    };
+
+    
+
+    const signup = (payload) => {
+
+      axios({
+        method: "post",
+        // url: `${API}/accounts/signup/`,
+        url: '/api/accounts/signup/',
+        data: payload,
+        headers: {
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "skip",
+        },
+      })
+        .then((res) => {
+          console.log('* 회원가입 성공?')
+          window.alert("회원가입 성공 !");
+          login({username: payload.username, password: payload.password1})
+          // router.push({ name: "home" });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     };
 
     return {
@@ -162,6 +201,7 @@ export const useMovieStore = defineStore(
       accessToken,
       loginModal,
       isLogin,
+      userInfo,
       nowplayingMovies,
       popularMovies,
     };

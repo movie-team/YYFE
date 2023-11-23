@@ -4,18 +4,16 @@
         <button>
             <img src="@/assets/icons/search1.png">
         </button>
-        <p class="nickname">{{ store.userInfo['username'] }}</p>
+        <p class="nickname">{{ store.userInfo?.username }}</p>
         <p class="profile">
           <div class="profileImg" @click="profileMenuClick">
             <img src="@/assets/deadpool_profile.jpg" alt="프로필">
           </div>
           <ul class="profileMenu" v-show="profileMenu">
             <li>내정보</li>
-            <li>야ㅁ</li>
-            <li>야ㅁ</li>
             <li
               @click="store.logout"
-              class="logoutBtn">
+              class="logout">
                 로그아웃
             </li>
           </ul>
@@ -87,5 +85,13 @@ button {
 
 button img {
   width: 100%;
+}
+
+.logout {
+  font-weight: bold;
+  color:black;
+}
+.logout:hover {
+  color: #3b0d12;
 }
 </style>
