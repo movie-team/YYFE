@@ -1,21 +1,26 @@
 <template>
     <div id="sliderWrapper">
         <VueperSlides
-          3d fixed-height="400px"
           bullets-outside
           autoplay
           :bullets="false"
           infinite
         >
+          <!-- <vueper-slide
+            v-for="(slide, i) in slides"
+            :key="i"
+            :title="slide.title"
+            :content="slide.content"
+            :image="slide.image"
+            :style="'background-color: gray; border-radius:20px;'"
+            > -->
           <vueper-slide
-              v-for="(slide, i) in slides"
-              :key="i"
-              :title="slide.title"
-              :content="slide.content"
-              :image="slide.image"
-              :style="'background-color: gray; border-radius:20px;'"
-              >
+            v-for="(slide, i) in slides"
+            :key="i"
+            :video="slide.video"
+          >
           </vueper-slide>
+          
         </VueperSlides>
     </div>
 </template>
@@ -26,14 +31,27 @@ import 'vueperslides/dist/vueperslides.css'
 
 const slides = [
   {
-    title: '더 커스',
-    content: '저주에 휩싸인 신혼부부 이야기. 엠마스톤의 코미디 드라마',
-    image: 'https://image.tving.com/ntgs/operation/banner/2023/11/10/1699582145_1.jpg/dims/resize/F_webp,1920'
+    title: '테일러 스위프트 : 디 에라스 투어 ',
+    content: '"이 문화적 현상이 대형 스크린에서 계속됩니다! 역사에 남을 숨 막히는 장면을 영화처럼 감상하며 일생일대의 콘서트 영화 체험에 푹 빠져보세요',
+    image: 'https://cdn.prod.mktg.evvnt.com/uploads/event_image/2001737/event_image/hero_maxresdefault.webp',
+    video: {
+      url: "https://www.youtube.com/embed/LVxVqUoANDI?rel=0&vq=hd1080&showinfo=0&controls=0&fs=0&modestbranding=1&color=white&iv_load_policy=3&autohide=1&enablejsapi=1&autoplay=1&mute=1",
+      props: {
+        allow: 'autoplay'
+        // allow:'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+      }
+    }
   },
   {
-    title: '반짝이는 워터멜론',
-    content: '수박처럼 청량한 네 청춘들의 이야기',
-    image: 'https://image.tving.com/ntgs/operation/banner/2023/10/24/1698141991_1.jpg/dims/resize/F_webp,1920'
+    title: '플라워 킬링 문',
+    content: '1920년대 오클라호마주 오세이지 부족 땅에서 석유가 발견된 후, 부족 사람들이 한 명씩 죽어 나가자 FBI가 미스터리를 풀기 위해 나선다.',
+    image: 'https://i.ytimg.com/vi/fXSHwEXh32g/maxresdefault.jpg',
+    video: {
+      url: "https://www.youtube.com/embed/nOUuUwYzdOA?rel=0&vq=hd1080&showinfo=0&controls=0&fs=0&modestbranding=1&color=white&iv_load_policy=3&autohide=1&enablejsapi=1&autoplay=1&mute=1",
+      props: {
+        allow:'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+      }
+    }
   }
 ]
 

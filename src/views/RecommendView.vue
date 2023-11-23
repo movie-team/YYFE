@@ -5,6 +5,18 @@
 </template>
 
 <script setup>
+import { useMovieStore } from '@/stores/movie';
+import { onMounted } from 'vue';
+
+const store = useMovieStore()
+
+onMounted(() =>{
+    console.log('시작')
+    store.recommendMovies().finally(
+        console.log('끝')
+    )
+})
+
 
 </script>
 

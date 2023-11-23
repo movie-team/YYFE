@@ -1,45 +1,51 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
-import MovieView from '@/views/MovieView.vue'
-import SeriesView from '@/views/SeriesView.vue'
-import RecommendView from '@/views/RecommendView.vue'
-import LoginOverView from '@/views/LoginOverView.vue'
-import SignupView from '@/views/SignupView.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import HomeView from "@/views/HomeView.vue";
+import PopularView from "@/views/PopularView.vue";
+import NowPlayingView from "@/views/NowPlayingView.vue";
+import RecommendView from "@/views/RecommendView.vue";
+import LoginOverView from "@/views/LoginOverView.vue";
+import SignupView from "@/views/SignupView.vue";
+import DetailView from "@/views/DetailView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView
+      path: "/",
+      name: "home",
+      component: HomeView,
     },
     {
-      path: '/movie',
-      name: 'movie',
-      component: MovieView
+      path: "/popular",
+      name: "popular",
+      component: PopularView,
     },
     {
-      path: '/series',
-      name: 'series',
-      component: SeriesView
+      path: "/nowplaying",
+      name: "nowplaying",
+      component: NowPlayingView,
     },
     {
-      path: '/recommend',
-      name: 'recommend',
-      component: RecommendView
+      path: "/recommend",
+      name: "recommend",
+      component: RecommendView,
     },
     {
-      path: '/login',
-      name: 'login',
-      component: LoginOverView
+      path: "/movie/:id",
+      name: "detail",
+      component: DetailView,
     },
     {
-      path: '/signup',
-      name: 'signup',
-      component: SignupView
+      path: "/login",
+      name: "login",
+      component: LoginOverView,
     },
-  ]
-})
+    {
+      path: "/signup",
+      name: "signup",
+      component: SignupView,
+    },
+  ],
+});
 
-export default router
+export default router;
