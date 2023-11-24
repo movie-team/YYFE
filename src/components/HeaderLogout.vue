@@ -1,7 +1,7 @@
 <template>
     <div class="hedaerMenu flexRow">
         <button class="movingBtn"
-          @click="store.loginModal = true"
+          @click="loginModal = true"
         >
             로그인
         </button>
@@ -9,14 +9,26 @@
           회원가입
         </p>
     </div>
+    <Modal v-if="loginModal" @close-event="closeModal">
+        <LoginForm />
+    </Modal>
 </template>
 
 <script setup>
 import { useMovieStore } from '../stores/movie';
 import { useRouter } from 'vue-router';
+import Modal from '@/components/Modal.vue'
+import LoginForm from '@/components/LoginForm.vue';
+import { ref } from 'vue';
 
 const store = useMovieStore()
 const router = useRouter()
+
+const loginModal = ref(false)
+
+const closeModal = () => {
+  loginModal.value = false
+  }
 </script>
 
 <style scoped>
