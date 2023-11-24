@@ -17,10 +17,13 @@ import PopularMovieRank from "@/components/PopularMovieRank.vue";
 
 const store = useMovieStore();
 onMounted(() => {
-  // console.log(`로그인 상태 : ${store.isLogin}, 토큰 : ${store.accessToken}`)
+  console.log(`로그인 상태 : ${store.isLogin}, 토큰 : ${store.accessToken}`);
   // store.getUserInfo()
-  console.log(store.accessToken);
 });
+
+// onUpdated(() => {
+//     console.log(`로그인 상태 : ${store.isLogin}, 토큰 : ${store.accessToken}`)
+// })
 </script>
 
 <style scoped>

@@ -12,6 +12,7 @@ export const useMovieStore = defineStore(
     const nowplayingMovies = ref([]);
     const popularMovies = ref([]);
     const userInfo = ref(null);
+    const recommendMovies = ref([]);
     const movieGenres = ref({
       12: "어드벤처",
       14: "판타지",
@@ -45,18 +46,21 @@ export const useMovieStore = defineStore(
       } else return false;
     });
 
-    const recommendMovies = async () => {
-      return await axios({
+    const getrecommendMovies = async (id) => {
+      await axios({
         method: "get",
-        url: `${API}/movies/4/recommend/`,
-        // url: `/api/movies/4/recommend/`,
+        // url: `${API}/movies/4/recommend/`,
+        url: `/api/movies/${id}/recommend/`,
         headers: {
           "Content-Type": "application/json",
-          // "ngrok-skip-browser-warning": "skip",
+          "ngrok-skip-browser-warning": "skip",
         },
       })
         .then((res) => {
+          console.log("얍");
           console.log(res.data);
+          recommendMovies.value = res.data;
+
           // return res.data
         })
         .catch((err) => {
@@ -82,7 +86,7 @@ export const useMovieStore = defineStore(
         });
     };
 
-    const getUserInfo = () => {
+    const getMyInfo = () => {
       axios({
         method: "get",
         // url: `${API}/accounts/user/`,
@@ -95,8 +99,27 @@ export const useMovieStore = defineStore(
       })
         .then((res) => {
           console.log("유저 정보 !!");
-          console.log(res);
-          userInfo.value = res;
+          console.log(res.data);
+          userInfo.value = res.data;
+        })
+        .catch((err) => console.log(err));
+    };
+
+    const getUserInfo = (id) => {
+      const nickname = ref(null);
+      return axios({
+        method: "get",
+        // url: `${API}/accounts/user/`,
+        url: `/api/accounts/${id}/`,
+        headers: {
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "skip",
+        },
+      })
+        .then((res) => {
+          console.log(res.data);
+          nickname.value = res.data.nickname;
+          return nickname.value;
         })
         .catch((err) => console.log(err));
     };
@@ -136,6 +159,7 @@ export const useMovieStore = defineStore(
           getUserInfo();
           window.alert("로그인 성공!");
           router.push({ name: "home" });
+          getUserInfo();
         })
         .catch((err) => {
           console.log(err);
@@ -190,7 +214,8 @@ export const useMovieStore = defineStore(
       login,
       logout,
       getMovies,
-      recommendMovies,
+      getrecommendMovies,
+      getMyInfo,
       getUserInfo,
       movieGenres,
       accessToken,
@@ -199,6 +224,7 @@ export const useMovieStore = defineStore(
       userInfo,
       nowplayingMovies,
       popularMovies,
+      recommendMovies,
     };
   },
   { persist: true }

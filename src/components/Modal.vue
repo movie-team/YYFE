@@ -3,7 +3,7 @@
     <div class="modalBg">
         <div class="modalWrapper">
             <div class="closeBtn"
-                @click="store.loginModal = false"
+                @click="$emit('closeEvent')"
             >❌</div>
             <slot></slot>
             <div class="deadpoolImg">
@@ -20,6 +20,8 @@ import { useMovieStore } from '../stores/movie';
 const store = useMovieStore()
 
 </script>
+
+
 
 <style scoped>
 

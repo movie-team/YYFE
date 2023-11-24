@@ -37,10 +37,10 @@ const moviePath = (path) => `https://image.tmdb.org/t/p/w500/${path}`
 
 <style scoped>
 h1 {
-  margin: 40px 0;
+    margin: 0 0 40px 0;
 }
 .popularWrapper {
-    padding: 40px;
+    padding: 10px 40px;
 }
 .grid {
     display: grid;
