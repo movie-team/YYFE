@@ -21,7 +21,7 @@
           <input
             type="password"
             id="password1"
-            placeholder="비빌번호"
+            placeholder="비밀번호"
             v-model="password1"
             required
           />
@@ -32,7 +32,7 @@
           <input
             type="password"
             id="password2"
-            placeholder="비빌번호 확인"
+            placeholder="비밀번호 확인"
             v-model="password2"
             required
           />
@@ -74,6 +74,9 @@ const nickname = ref(null);
 const email = ref(null);
 
 const signup = () => {
+  if (password1.value != password2.value){
+    window.alert('비밀번호를 다시 확인해주세요')
+  }
   const payload = {
     username: username.value,
     password1: password1.value,
@@ -83,8 +86,6 @@ const signup = () => {
   };
   console.log(payload);
   store.signup(payload);
-  window.alert("회원가입 성공!");
-  router.push({ name: "home" });
 };
 </script>
 

@@ -4,7 +4,7 @@
     <div
       class="card flexColumn"
       v-for="movie in movies"
-      v-show="movies.indexOf(movie) < 100"
+      v-show="movies.indexOf(movie) < 20"
       :key="movie.id"
       @click="router.push({ name: 'detail', params: { id: movie.id } })"
     >

@@ -16,7 +16,7 @@
           <input
             type="password"
             id="password"
-            placeholder="비빌번호"
+            placeholder="비밀번호"
             v-model="password"
           />
         </label>

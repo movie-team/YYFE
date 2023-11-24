@@ -8,6 +8,7 @@
             :bullets="false"
         >
             <VueperSlide v-for="movie in movies"
+                @click="router.push({ name: 'detail', params: { id: movie.id } })"
                 :key="movie.id"
             >
                 <template v-slot:content>
@@ -31,9 +32,11 @@ import { VueperSlides, VueperSlide } from 'vueperslides'
 import 'vueperslides/dist/vueperslides.css'
 import { useMovieStore } from '@/stores/movie'
 import { ref, computed, onMounted, watch } from 'vue'
+import { useRouter } from 'vue-router'
 
 const store = useMovieStore()
 const movies = ref([])
+const router = useRouter()
 
 // 백엔드에서 받은 영화 배열
 onMounted(()=> {
