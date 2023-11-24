@@ -38,7 +38,7 @@ export const useMovieStore = defineStore(
     // accesstoken 는 분단위
     // refreshtoken 은 일단위
 
-    const API = 'http://localhost:8000'
+    const API = "http://localhost:8000";
 
     const isLogin = computed(() => {
       if (accessToken.value) {
@@ -57,10 +57,10 @@ export const useMovieStore = defineStore(
         },
       })
         .then((res) => {
-          console.log('얍')
+          console.log("얍");
           console.log(res.data);
-          recommendMovies.value = res.data
-  
+          recommendMovies.value = res.data;
+
           // return res.data
         })
         .catch((err) => {
@@ -100,31 +100,13 @@ export const useMovieStore = defineStore(
         .then((res) => {
           console.log("유저 정보 !!");
           console.log(res.data);
-          getrecommendMovies(res.data.pk);
-          getMyInfo2(res.data.pk)
-        })
-        .catch((err) => console.log(err));
-    };
-
-    const getMyInfo2 = (id) => {
-      axios({
-        method: "get",
-        // url: `${API}/accounts/user/`,
-        url: `/api/accounts/${id}/`,
-        headers: {
-          "Content-Type": "application/json",
-          "ngrok-skip-browser-warning": "skip",
-        },
-      })
-        .then((res) => {
-          console.log(res.data);
           userInfo.value = res.data;
         })
         .catch((err) => console.log(err));
     };
 
     const getUserInfo = (id) => {
-      const nickname = ref(null)
+      const nickname = ref(null);
       return axios({
         method: "get",
         // url: `${API}/accounts/user/`,
@@ -136,12 +118,11 @@ export const useMovieStore = defineStore(
       })
         .then((res) => {
           console.log(res.data);
-          nickname.value = res.data.nickname
-          return nickname.value
+          nickname.value = res.data.nickname;
+          return nickname.value;
         })
         .catch((err) => console.log(err));
     };
-
 
     const getCSRFToken = () => {
       const name = "csrftoken=";
@@ -169,16 +150,16 @@ export const useMovieStore = defineStore(
         headers: {
           "Content-Type": "application/json",
           "ngrok-skip-browser-warning": "skip",
-          "X-CSRFToken": csrfToken,  // CSRF 토큰을 헤더에 추가
+          "X-CSRFToken": csrfToken, // CSRF 토큰을 헤더에 추가
         },
       })
         .then((res) => {
           accessToken.value = res.data.key;
           loginModal.value = false;
-          // console.log(accessToken.value)
+          getUserInfo();
           window.alert("로그인 성공!");
           router.push({ name: "home" });
-          getMyInfo();
+          getUserInfo();
         })
         .catch((err) => {
           console.log(err);
@@ -186,7 +167,6 @@ export const useMovieStore = defineStore(
     };
 
     const logout = () => {
-
       const csrfToken = getCSRFToken();
       axios({
         method: "post",
@@ -196,7 +176,7 @@ export const useMovieStore = defineStore(
           Authorization: `Token ${accessToken.value}`,
           "Content-Type": "application/json",
           "ngrok-skip-browser-warning": "skip",
-          "X-CSRFToken": csrfToken,  // CSRF 토큰을 헤더에 추가
+          "X-CSRFToken": csrfToken, // CSRF 토큰을 헤더에 추가
         },
       })
         .then((res) => {
@@ -207,14 +187,11 @@ export const useMovieStore = defineStore(
         .catch((err) => console.log(err));
     };
 
-    
-
     const signup = (payload) => {
-
       axios({
         method: "post",
         // url: `${API}/accounts/signup/`,
-        url: '/api/accounts/signup/',
+        url: "/api/accounts/signup/",
         data: payload,
         headers: {
           "Content-Type": "application/json",
@@ -222,9 +199,9 @@ export const useMovieStore = defineStore(
         },
       })
         .then((res) => {
-          console.log('* 회원가입 성공?')
+          console.log("* 회원가입 성공?");
           window.alert("회원가입 성공 !");
-          login({username: payload.username, password: payload.password1})
+          login({ username: payload.username, password: payload.password1 });
           // router.push({ name: "home" });
         })
         .catch((err) => {
@@ -247,7 +224,7 @@ export const useMovieStore = defineStore(
       userInfo,
       nowplayingMovies,
       popularMovies,
-      recommendMovies
+      recommendMovies,
     };
   },
   { persist: true }
