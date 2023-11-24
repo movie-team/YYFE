@@ -1,41 +1,36 @@
 <template>
-    <div class="hedaerMenu flexRow">
-        <!-- <p @click="store.logout">로그아웃</p> -->
-        <button>
-            <img src="@/assets/icons/search1.png">
-        </button>
-        <p class="nickname">{{ store.userInfo?.username }}</p>
-        <p class="profile">
-          <div class="profileImg" @click="profileMenuClick">
-            <img src="@/assets/deadpool_profile.jpg" alt="프로필">
-          </div>
-          <ul class="profileMenu" v-show="profileMenu">
-            <li>내정보</li>
-            <li
-              @click="store.logout"
-              class="logout">
-                로그아웃
-            </li>
-          </ul>
-        </p>
+  <div class="hedaerMenu flexRow">
+    <!-- <p @click="store.logout">로그아웃</p> -->
+    <button>
+      <img src="@/assets/icons/search1.png" />
+    </button>
+    <p class="nickname">{{ store.userInfo?.username }}</p>
+    <div class="profile">
+      <div class="profileImg" @click="profileMenuClick">
+        <img src="@/assets/deadpool_profile.jpg" alt="프로필" />
+      </div>
+      <ul class="profileMenu" v-show="profileMenu">
+        <li>내정보</li>
+        <li @click="store.logout" class="logout">로그아웃</li>
+      </ul>
     </div>
+  </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useMovieStore } from '@/stores/movie';
+import { ref } from "vue";
+import { useMovieStore } from "@/stores/movie";
 
 const store = useMovieStore();
 
 const profileMenu = ref(false);
 
 const profileMenuClick = () => {
-  console.log( '클릭!' )
-  profileMenu.value = !profileMenu.value
-  console.log(profileMenu.value)
-}
-console.log(store.userInfo)
-
+  console.log("클릭!");
+  profileMenu.value = !profileMenu.value;
+  console.log(profileMenu.value);
+};
+console.log(store.userInfo);
 </script>
 
 <style scoped>
