@@ -27,7 +27,7 @@
       </div>
   </div>
   <Modal v-if="reviewModal" @close-event="closeModal">
-    <CreateReview :movieid="movie.id" @close-event="closeModal"/>
+    <CreateReview :movieid="movie.id" @close-event="closeModal" />
   </Modal>
 </template>
 
@@ -50,15 +50,16 @@ const moviePath = (path) => `https://image.tmdb.org/t/p/w500/${path}`;
 
 const closeModal = () => {
   reviewModal.value = false
+  getReviews()
 }
 
 const wrtieReview = () => {
   reviewModal.value = true
 }
 
+const getReviews = () => {
 
-onMounted(() => {
-
+  const reviews = ref([])
   store
     .getMovies(`${movieId.value}`)
     .then((el) => {
@@ -67,26 +68,21 @@ onMounted(() => {
       //     return store.getMovies(`${movieId.value}/review/${reviewId}`)
       // })
       el.review.forEach((reviewId) => {
-        store.getMovies(`${movieId.value}/review/${reviewId}`).then(el => reviewList.value.push(el))
+        store.getMovies(`${movieId.value}/review/${reviewId}`).then(el => reviews.value.push(el))
         // console.log(reviewList.value)
-      })})
+      })
+      reviewList.value = reviews.value
+    })
+}
+onMounted(() => {
+  getReviews()
 });
 
 onUpdated(() => {
   reviewList.value.forEach(review => {
     store.getUserInfo(review?.user).then(res => review['nickname'] = res)
   })
-  store
-    .getMovies(`${movieId.value}`)
-    .then((el) => {
-      movie.value = el;
-      // reviewList.value = el.review.map((reviewId) => {
-      //     return store.getMovies(`${movieId.value}/review/${reviewId}`)
-      // })
-      el.review.forEach((reviewId) => {
-        store.getMovies(`${movieId.value}/review/${reviewId}`).then(el => reviewList.value.push(el))
-        // console.log(reviewList.value)
-      })})
+
 })
 </script>
 

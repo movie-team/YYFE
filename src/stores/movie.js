@@ -117,7 +117,7 @@ export const useMovieStore = defineStore(
         },
       })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           userInfo.value = res.data;
         })
         .catch((err) => console.log(err));
@@ -135,7 +135,7 @@ export const useMovieStore = defineStore(
         },
       })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           nickname.value = res.data.nickname
           return nickname.value
         })
