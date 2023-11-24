@@ -5,8 +5,15 @@ import HeaderLogout from '@/components/HeaderLogout.vue'
 import Modal from '@/components/Modal.vue';
 import LoginForm from '@/components/LoginForm.vue';
 import { useMovieStore } from '@/stores/movie';
+import { onMounted, ref } from 'vue';
 
 const store = useMovieStore()
+const loginModal = ref(false)
+const closeModal = () => {
+  loginModal.value = false
+  }
+
+
 </script>
 
 <template>
@@ -25,7 +32,7 @@ const store = useMovieStore()
       <!-- {{ store.isLogin ? <HeaderLogin /> : <HeaderLogin/> }} -->
 
     </div>
-      <Modal v-if="store.loginModal">
+      <Modal v-if="store.loginModal" @close-event="closeModal">
         <LoginForm />
       </Modal>
   </header>

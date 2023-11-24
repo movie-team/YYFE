@@ -9,7 +9,7 @@
                 </h3>
                 <button
                     class="movingBtn loginBtn"
-                    @click="store.loginModal = true"
+                    @click="loginModal = true"
                 >
                     무빙 로그인
                 </button>
@@ -22,13 +22,24 @@
             </div>
         </div>
     </div>
+    <Modal v-if="loginModal" @close-event="closeModal">
+        <LoginForm />
+    </Modal>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { useMovieStore } from '../stores/movie';
 import { useRouter } from 'vue-router';
+import Modal from '@/components/Modal.vue'
+import LoginForm from '@/components/LoginForm.vue';
+
 const store = useMovieStore()
 const router = useRouter()
+const loginModal = ref(false)
+const closeModal = () => {
+  loginModal.value = false
+  }
 
 </script>
 
